@@ -15,15 +15,22 @@ b=ResY/2;
 
 r=1000.0;
 delta=500;
-for i=1:1:4*a
-    for j=1:1:4*b
-        if(  ((a-i)^2 +(b-j)^2>r) &&  ( (a-i)^2 +(b-j)^2<(r+delta) )   )
-            E_target(uint16(i),uint16(j))=255;
-            sprintf('%d %d',i,j)
-            
-        end
-    end
-end
+
+% to generate a circle:
+% for i=1:1:4*a
+%     for j=1:1:4*b
+%         if(  ((a-i)^2 +(b-j)^2>r) &&  ( (a-i)^2 +(b-j)^2<(r+delta) )   )
+%             E_target(uint16(i),uint16(j))=255;
+%             sprintf('%d %d',i,j)
+%             
+%         end
+%     end
+% end
+
+% To generate a single spot
+E_target(a+100,b)=255;
+
+imshow(E_target)
 imshow(E_target)
 % We show the target pattern
 
