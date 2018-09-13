@@ -1,6 +1,12 @@
+%% Algorithm to generate Pattern for projection onto Spatial Light Modulators
+
+% Resolution of the SLM
 ResX=1380
 ResY=2048
 
+%------------- We start with all black image and generate a target field intensity
+
+% Generating all black image
 E_target=zeros(ResX,ResY);
 
 % E_target(300-100,396+60)=255;
@@ -31,11 +37,12 @@ delta=500;
 E_target(a+100,b)=255;
 
 imshow(E_target)
-imshow(E_target)
-% We show the target pattern
+title('target Pattern')
+%  target pattern
 
 
-%%
+%% 
+%--------------- We generate a 256 bit phase distribution
 E_target=fftshift(E_target);
 
 Phase=rand(ResX,ResY)*(2*pi);
@@ -55,7 +62,9 @@ Phase=angle(holo);
 % For a general 256 bit SLM
 Phase=uint8(mod(Phase+2*pi,2*pi)/(2*pi)*255);
 
-%% for the forthdd SLM which is binary
+%% 
+% ----------- We convert the generated phase distribution to binary
+%for the forthdd SLM which is binary
 PhaseMat= angle(holo)>0;
 Phase= uint8(PhaseMat*255);
 
