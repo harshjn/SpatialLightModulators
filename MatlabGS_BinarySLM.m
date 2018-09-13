@@ -61,6 +61,8 @@ Phase=angle(holo);
 
 % For a general 256 bit SLM
 Phase=uint8(mod(Phase+2*pi,2*pi)/(2*pi)*255);
+imshow(Phase)
+title('256 bit phase distribution pattern')
 
 %% 
 % ----------- We convert the generated phase distribution to binary
