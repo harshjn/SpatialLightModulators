@@ -72,5 +72,6 @@ Phase= uint8(PhaseMat*255);
 
 % addSave=''
 imshow(ifftshift(Phase))
+title('Generated 2 bit pattern')
 imwrite(ifftshift(Phase),'GS_generated.bmp')
 %This is the final generated image
