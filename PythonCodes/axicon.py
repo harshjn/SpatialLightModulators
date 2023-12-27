@@ -10,23 +10,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-A=np.zeros([792,600])
+M_x=792; # x-resolution of SLM
+M_y=600; # y-resolution of SLM
+A=np.zeros([M_x,M_y])
 pi=np.pi;
 
-
-Cx=400;
+Cx=400; # x-Center of axicon pattern
 Cy=210;
-M_x=792;
-M_y=600;
 
-def phase2hamamatsu(Phase_xy):
+def phase2hamamatsu(Phase_xy):  # Hamamatsu SLM phase bit varies from 0 to 224
     for p in range(M_x):
         for q in range(M_y):
             Phase_xy[p][q]=np.mod(Phase_xy[p][q],2*pi)*224/(2*pi)
     return Phase_xy
 
 
-
+# Generating image for the pattern around center (Cx,Cy)
 for i in range(792):
     for j in range(600):
         n=20
@@ -35,8 +34,8 @@ for i in range(792):
         theta=np.arctan((j-Cy)/(i-Cx+1e-6))
         A[i,j]=np.mod(n*theta-2*pi*r/r_o,2*pi)
         
-im=A;
-im=phase2hamamatsu(im)
+im=A; # 8-bit Image from 0 to 255 (uint8)
+im=phase2hamamatsu(im) 
 im=np.transpose(im)
 im=im.astype(np.uint8)
 image=Image.fromarray(im)
